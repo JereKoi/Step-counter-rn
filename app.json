@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Step-counter",
-    "slug": "Step-counter",
+    "slug": "step-counter-rn",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -36,6 +36,15 @@
     ],
     "experiments": {
       "typedRoutes": true
-    }
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      },
+      "eas": {
+        "projectId": "a96beca8-0f63-43a6-b3ac-cbf6a6f13a21"
+      }
+    },
+    "owner": "jerekoivisto"
   }
 }
