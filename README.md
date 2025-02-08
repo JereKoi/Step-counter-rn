@@ -14,6 +14,8 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
 
    ```bash
     npx expo start
+
+    npx expo start --localhost
    ```
 
 In the output, you'll find options to open the app in a
@@ -24,10 +26,6 @@ In the output, you'll find options to open the app in a
 - [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
 
 You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## To get app running on android, start like this:
-npx expo start --localhost
-
 
 ## Get a fresh project
 
