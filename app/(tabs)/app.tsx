@@ -4,8 +4,23 @@ import { HelloWave } from '@/components/HelloWave';
 import ParallaxScrollView from '@/components/ParallaxScrollView';
 import { ThemedText } from '@/components/ThemedText';
 import { ThemedView } from '@/components/ThemedView';
+import { Pedometer } from "expo-sensors";
+import React, { useEffect, useState } from "react";
 
-export default function HomeScreen() {
+
+export default function App() {
+  const [steps, setSteps] = useState(0);
+
+useEffect(() => {
+  subscribe();
+}, [])
+
+  const subscribe = () => {
+    const subscribtion = Pedometer.watchStepCount((result) => {
+      updateStepCount(result.steps)
+    })
+  }
+
   return (
     <ParallaxScrollView
       headerBackgroundColor={{ light: '#A1CEDC', dark: '#1D3D47' }}
@@ -16,7 +31,8 @@ export default function HomeScreen() {
         />
       }>
       <ThemedView style={styles.container}>
-        <ThemedText type="title">Hello!</ThemedText>
+        <ThemedText type="default">{steps}</ThemedText>
+
         <HelloWave />
       </ThemedView>
       <ThemedView style={styles.container}>
@@ -62,3 +78,7 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
   });
+
+function updateStepCount(steps: number) {
+  steps++;
+}

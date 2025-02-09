@@ -16,6 +16,11 @@ This is an [Expo](https://expo.dev) project created with [`create-expo-app`](htt
     npx expo start
 
     npx expo start --localhost
+
+
+    for android studio:
+    adb devices
+    adb -s <device name> reverse tcp:8081 tcp:8081
    ```
 
 In the output, you'll find options to open the app in a
