@@ -51,3 +51,12 @@ expo-env.d.ts
 
 .expo
 .idea
+
+
+/android/.gradle/
+/android/app/build/
+/android/.idea/
+/android/local.properties
+*.iml
+.gradle/
+/build/

@@ -7,9 +7,19 @@ import { ThemedView } from '@/components/ThemedView';
 import { Pedometer } from "expo-sensors";
 import React, { useEffect, useState } from "react";
 
-
 export default function App() {
   const [steps, setSteps] = useState(0);
+  const [PedometerAvailability, setPedometerAvailability] = useState("");
+
+Pedometer.isAvailableAsync().then(
+  (result) => {
+    setPedometerAvailability(String(result))
+  },
+  (error) => {
+    setPedometerAvailability(error);
+  }
+)
+
 
 useEffect(() => {
   subscribe();
@@ -17,7 +27,7 @@ useEffect(() => {
 
   const subscribe = () => {
     const subscribtion = Pedometer.watchStepCount((result) => {
-      updateStepCount(result.steps)
+      setSteps(result.steps)
     })
   }
 
@@ -31,6 +41,7 @@ useEffect(() => {
         />
       }>
       <ThemedView style={styles.container}>
+      <ThemedText type="default">Is Pedometer available on the device:{PedometerAvailability} </ThemedText>
         <ThemedText type="default">{steps}</ThemedText>
 
         <HelloWave />
@@ -78,7 +89,3 @@ const styles = StyleSheet.create({
       justifyContent: 'center',
     },
   });
-
-function updateStepCount(steps: number) {
-  steps++;
-}
