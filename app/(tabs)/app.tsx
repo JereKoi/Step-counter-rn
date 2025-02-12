@@ -46,6 +46,11 @@ export default function App() {
             titleStyle={{ fontWeight: "bold" }}
           />
         </view>
+        <view>
+          <h3>Target : //User can set their own target steps here for example 6500 steps (5km)</h3>
+        </view>
+        <view></view>
+        <view></view>
       </view>
     </view>
   );
