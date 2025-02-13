@@ -30,7 +30,7 @@ export default function App() {
   return (
     <view style={styles.container}>
       <view style={{ flex: 1, justifyContent: "center " }}>
-        <h1>Is Pedometer available on the device:{PedometerAvailability} </h1>
+        <h1 style={styles.textDesign}>Is Pedometer available on the device:{PedometerAvailability} </h1>
         <view>
           <CircularProgress
             value={steps}
@@ -47,10 +47,10 @@ export default function App() {
           />
         </view>
         <view>
-          <h3>Target : //User can set their own target steps here for example 6500 steps (5km)</h3>
+          <h3 style={styles.textDesign}>Target : 10000 steps</h3>
         </view>
-        <view></view>
-        <view></view>
+        <view><h3 style={styles.textDesign}>Distance covered : </h3></view>
+        <view>Calories burnt : </view>
       </view>
     </view>
   );
@@ -64,4 +64,8 @@ const styles = StyleSheet.create({
     fontSize: 20,
     fontWeight: "bold",
   },
+
+  textDesign : {
+    color : "white"
+  }
 });
