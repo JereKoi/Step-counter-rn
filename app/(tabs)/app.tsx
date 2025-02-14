@@ -30,8 +30,10 @@ export default function App() {
   return (
     <view style={styles.container}>
       <view style={{ flex: 1, justifyContent: "center " }}>
-        <h1 style={styles.textDesign}>Is Pedometer available on the device:{PedometerAvailability} </h1>
-        <view>
+        <h1 style={styles.textDesign}>
+          Is Pedometer available on the device:{PedometerAvailability}{" "}
+        </h1>
+        <view style={{ flex: 1 }}>
           <CircularProgress
             value={steps}
             maxValue={10000}
@@ -46,11 +48,16 @@ export default function App() {
             titleStyle={{ fontWeight: "bold" }}
           />
         </view>
-        <view>
-          <h3 style={styles.textDesign}>Target : 10000 steps</h3>
+        <view style={{ flex: 1 }}>
+          <view>
+            <h3 style={styles.textDesign}>Target : 10000 steps</h3>
+          </view>
+
+          <view>
+            <h3 style={styles.textDesign}>Distance covered : </h3>
+          </view>
+          <view>Calories burnt : </view>
         </view>
-        <view><h3 style={styles.textDesign}>Distance covered : </h3></view>
-        <view>Calories burnt : </view>
       </view>
     </view>
   );
@@ -65,7 +72,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  textDesign : {
-    color : "white"
-  }
+  textDesign: {
+    color: "white",
+  },
 });
