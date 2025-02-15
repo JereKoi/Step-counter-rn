@@ -8,24 +8,29 @@ export default function App() {
   const [steps, setSteps] = useState(0);
   const [PedometerAvailability, setPedometerAvailability] = useState("");
 
-  Pedometer.isAvailableAsync().then(
-    (result) => {
-      setPedometerAvailability(String(result));
-    },
-    (error) => {
-      setPedometerAvailability(error);
-    }
-  );
-
   useEffect(() => {
-    subscribe();
+    console.log("Checking if pedometer is available");
+    Pedometer.isAvailableAsync().then(
+      (result) => {
+        console.log("Pedometer available:", result);
+        setPedometerAvailability(String(result));
+      },
+      (error) => console.log("Error checking pedometer:", error)
+    );
   }, []);
 
-  const subscribe = () => {
-    const subscribtion = Pedometer.watchStepCount((result) => {
+  useEffect(() => {
+    console.log("Subscribing to step count");
+    const subscription = Pedometer.watchStepCount((result) => {
+      console.log("Steps updated", result.steps);
       setSteps(result.steps);
     });
-  };
+
+    return () => {
+      console.log("Unsubscribing from step count");
+      subscription && subscription.remove();
+    };
+  }, []);
 
   return (
     <view style={styles.container}>
