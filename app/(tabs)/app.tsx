@@ -1,4 +1,5 @@
 import { StyleSheet, View, Text } from "react-native";
+import * as Permissions from "expo-permissions";
 
 import { Pedometer } from "expo-sensors";
 import React, { useEffect, useState } from "react";
@@ -7,6 +8,14 @@ import CircularProgress from "react-native-circular-progress-indicator";
 export default function App() {
   const [steps, setSteps] = useState(0);
   const [PedometerAvailability, setPedometerAvailability] = useState("");
+
+  useEffect(() => {
+    async function requestPermissions() {
+      const { status } = await Permissions.askAsync(Permissions.MOTION);
+      console.log("Motion permission status:", status);
+    }
+    requestPermissions();
+  }, []);
 
   useEffect(() => {
     console.log("Checking if pedometer is available");
@@ -33,17 +42,18 @@ export default function App() {
   }, []);
 
   return (
-    <View style = {styles.container}>
-      <Text style = {styles.textDesign}>
-        Is Pedometer available on the deivce {PedometerAvailability}</Text>
-        <View style={{flex: 1}}>
-          <CircularProgress
+    <View style={styles.container}>
+      <Text style={styles.textDesign}>
+        Is Pedometer available on the deivce {PedometerAvailability}
+      </Text>
+      <View style={{ flex: 1 }}>
+        <CircularProgress
           value={steps}
           maxValue={10000}
           radius={210}
           activeStrokeColor={"#2465FD"}
-          />
-        </View>
+        />
+      </View>
     </View>
   );
 }
@@ -59,7 +69,7 @@ const styles = StyleSheet.create({
 
   textDesign: {
     color: "white",
-    flexDirection: 'row',
-    alignItems: 'center',
+    flexDirection: "row",
+    alignItems: "center",
   },
 });
