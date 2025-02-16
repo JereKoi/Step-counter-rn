@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 
 import { Pedometer } from "expo-sensors";
 import React, { useEffect, useState } from "react";
@@ -33,38 +33,18 @@ export default function App() {
   }, []);
 
   return (
-    <view style={styles.container}>
-      <view style={{ flex: 1, justifyContent: "center " }}>
-        <h1 style={styles.textDesign}>
-          Is Pedometer available on the device:{PedometerAvailability}{" "}
-        </h1>
-        <view style={{ flex: 1 }}>
+    <View style = {styles.container}>
+      <Text style = {styles.textDesign}>
+        Is Pedometer available on the deivce {PedometerAvailability}</Text>
+        <View style={{flex: 1}}>
           <CircularProgress
-            value={steps}
-            maxValue={10000}
-            radius={210}
-            activeStrokeColor={"#2465FD"}
-            activeStrokeSecondaryColor={"#C25AFF"}
-            inActiveStrokeOpacity={0.5}
-            inActiveStrokeWidth={40}
-            activeStrokeWidth={40}
-            title={"Step count"}
-            titleColor={"#ECF0F1"}
-            titleStyle={{ fontWeight: "bold" }}
+          value={steps}
+          maxValue={10000}
+          radius={210}
+          activeStrokeColor={"#2465FD"}
           />
-        </view>
-        <view style={{ flex: 1 }}>
-          <view>
-            <h3 style={styles.textDesign}>Target : 10000 steps</h3>
-          </view>
-
-          <view>
-            <h3 style={styles.textDesign}>Distance covered : </h3>
-          </view>
-          <view>Calories burnt : </view>
-        </view>
-      </view>
-    </view>
+        </View>
+    </View>
   );
 }
 
@@ -79,5 +59,7 @@ const styles = StyleSheet.create({
 
   textDesign: {
     color: "white",
+    flexDirection: 'row',
+    alignItems: 'center',
   },
 });
