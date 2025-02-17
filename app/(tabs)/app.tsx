@@ -11,7 +11,7 @@ export default function App() {
 
   useEffect(() => {
     async function requestPermissions() {
-      const { status } = await Permissions.askAsync(Permissions.MOTION);
+      const { status } = await Pedometer.requestPermissionsAsync();
       console.log("Motion permission status:", status);
     }
     requestPermissions();
