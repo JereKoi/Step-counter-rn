@@ -1,5 +1,4 @@
 import { StyleSheet, View, Text } from "react-native";
-import * as Permissions from "expo-permissions";
 
 import { Pedometer } from "expo-sensors";
 import React, { useEffect, useState } from "react";
@@ -13,6 +12,9 @@ export default function App() {
     async function requestPermissions() {
       const { status } = await Pedometer.requestPermissionsAsync();
       console.log("Motion permission status:", status);
+      if (status !== "granted") {
+        alert("Need permission for step detection!");
+      }
     }
     requestPermissions();
   }, []);
