@@ -32,15 +32,19 @@ export default function App() {
 
   useEffect(() => {
     console.log("Subscribing to step count");
-    const subscription = Pedometer.watchStepCount((result) => {
-      console.log("Steps updated", result.steps);
-      setSteps(result.steps);
-    });
+    try {
+      const subscription = Pedometer.watchStepCount((result) => {
+        console.log("Steps updated:", result.steps);
+        setSteps(result.steps);
+      });
 
-    return () => {
-      console.log("Unsubscribing from step count");
-      subscription && subscription.remove();
-    };
+      return () => {
+        console.log("Unsubscribing from step count");
+        subscription && subscription.remove();
+      };
+    } catch (error) {
+      console.log("Error subscribing to step count:", error);
+    }
   }, []);
 
   return (
