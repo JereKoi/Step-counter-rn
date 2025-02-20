@@ -6,7 +6,7 @@ import CircularProgress from "react-native-circular-progress-indicator";
 
 export default function App() {
   const [steps, setSteps] = useState(0);
-  const [PedometerAvailability, setPedometerAvailability] = useState("");
+  const [isPedometerAvailable, setPedometerAvailability] = useState("");
 
   useEffect(() => {
     async function requestPermissions() {
@@ -50,7 +50,7 @@ export default function App() {
   return (
     <View style={styles.container}>
       <Text style={styles.textDesign}>
-        Is Pedometer available on the deivce {PedometerAvailability}
+        Is Pedometer available on the deivce {isPedometerAvailable}
       </Text>
       <View style={{ flex: 1 }}>
         <CircularProgress
