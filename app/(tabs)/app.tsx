@@ -9,13 +9,19 @@ export default function App() {
   const [isPedometerAvailable, setPedometerAvailability] = useState("");
 
   useEffect(() => {
-    async function requestPermissions() {
-      const { status } = await Pedometer.requestPermissionsAsync();
-      console.log("Motion permission status:", status);
-      if (status !== "granted") {
-        alert("Need permission for step detection!");
+    const requestPermissions = async () => {
+      try {
+        const { status } = await Pedometer.requestPermissionsAsync();
+        console.log("Motion permission status:", status);
+        if (status !== "granted") {
+          alert("Permission denied. Steps will not be counted");
+        }
+      } catch (error) {
+        console.error("Error requesting permissions:", error);
+        alert("An error occurred while requesting permissions.");
       }
-    }
+    };
+
     requestPermissions();
   }, []);
 
