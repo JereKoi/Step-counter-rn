@@ -6,7 +6,7 @@ import CircularProgress from "react-native-circular-progress-indicator";
 
 export default function App() {
   const [steps, setSteps] = useState(0);
-  const [isPedometerAvailable, setPedometerAvailability] = useState("");
+  const [isPedometerAvailable, setPedometerAvailability] = useState(false);
 
   useEffect(() => {
     const requestPermissions = async () => {
@@ -26,37 +26,44 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-    console.log("Checking if pedometer is available");
-    Pedometer.isAvailableAsync().then(
-      (result) => {
-        console.log("Pedometer available:", result);
-        setPedometerAvailability(String(result));
-      },
-      (error) => console.log("Error checking pedometer:", error)
-    );
+    const checkPedometerAvailability = async () => {
+      try {
+        const available = await Pedometer.isAvailableAsync();
+        console.log("Pedometer available:", available);
+        setPedometerAvailability(available);
+      } catch (error) {
+        console.error("Error checking pedometer:", error);
+        setPedometerAvailability(false);
+      }
+    };
+
+    checkPedometerAvailability();
   }, []);
 
   useEffect(() => {
     console.log("Subscribing to step count");
+
+    let subscription = null;
+
     try {
-      const subscription = Pedometer.watchStepCount((result) => {
+      subscription = Pedometer.watchStepCount((result) => {
         console.log("Steps updated:", result.steps);
         setSteps(result.steps);
       });
-
-      return () => {
-        console.log("Unsubscribing from step count");
-        subscription && subscription.remove();
-      };
     } catch (error) {
-      console.log("Error subscribing to step count:", error);
+      console.error("Error subscribing to step count:", error);
     }
+
+    return () => {
+      console.log("Unsubscribing from step count");
+      subscription?.remove();
+    };
   }, []);
 
   return (
     <View style={styles.container}>
       <Text style={styles.textDesign}>
-        Is Pedometer available on the deivce {isPedometerAvailable}
+        Is Pedometer available on the device {isPedometerAvailable}
       </Text>
       <View style={{ flex: 1 }}>
         <CircularProgress
@@ -73,7 +80,7 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     color: "white",
-    backgroundColor: "rgba(255, 255, 255, 255, 0.5)",
+    backgroundColor: "rgba(255, 255, 255, 0.5)",
     alignSelf: "center",
     fontSize: 20,
     fontWeight: "bold",
