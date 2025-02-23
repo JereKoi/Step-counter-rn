@@ -55,3 +55,16 @@ Join our community of developers creating universal apps.
 
 - [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
 - [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+
+
+### Updating node modules
+
+rmdir /s /q node_modules && del package-lock.json
+
+npm install
+
+
+### Cleaning gradlew on android
+
+cd android
+gradlew.bat clean
